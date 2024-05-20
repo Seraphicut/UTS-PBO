@@ -12,106 +12,88 @@ import java.util.Scanner;
  * @author A-27
  */
 public class UTS {
-    public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
+public static void main(String[] args) {
+        // Tampilan pembatas
+        System.out.println("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx");
 
-        // Tampilan awal
-        System.out.println("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx");
-        System.out.println("UTS 20 Mei 2024 oleh AZZURA CUT WILHELMINA NIM 23201282");
-        System.out.println("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx");
+        // Judul UTS
+        System.out.println("UTS 20 Mei 2024 oleh Azzura Cut Wilhelmina NIM 23201282");
+
+        // Tampilan pembatas
+        System.out.println("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx");
 
         // Meminta nama pengguna
+        Scanner scanner = new Scanner(System.in);
         System.out.print("Masukkan nama Anda: ");
         String nama = scanner.nextLine();
 
-        // Meminta jenis kelamin pengguna
-        System.out.println("Pilih jenis kelamin:");
-        System.out.println("(1) Laki-laki");
-        System.out.println("(2) Perempuan");
-        int genderChoice = scanner.nextInt();
-        scanner.nextLine(); // Membersihkan buffer
+        // Meminta jenis kelamin
+        System.out.print("Pilih jenis kelamin (1) Laki-laki atau (2) Perempuan: ");
+        int jenisKelamin = scanner.nextInt();
 
-        String panggilan;
-        if (genderChoice == 1) {
-            panggilan = "Mas";
-        } else if (genderChoice == 2) {
-            panggilan = "Mbak";
-        } else {
-            System.out.println("Pilihan tidak valid, default ke 'Mbak'");
-            panggilan = "Mbak";
-        }
+        // Menyimpan panggilan berdasarkan jenis kelamin
+        String panggilan = (jenisKelamin == 1) ? "Mas" : "Mbak";
 
-        // Menampilkan salam
-        System.out.println("Selamat Datang " + panggilan + " " + nama);
+        // Menyambut pengguna
+        System.out.println("\nSelamat Datang " + panggilan + " " + nama + "!");
 
-        // Memulai kalkulator
-        boolean lanjutkan = true;
-        while (lanjutkan) {
-            System.out.println("Kalkulator");
+        // Menampilkan judul kalkulator
+        System.out.println("\nKalkulator");
 
-            // Meminta input bilangan 1
-            System.out.print("Masukkan bilangan pertama: ");
-            double bil1 = scanner.nextDouble();
+        // Perulangan untuk kalkulator
+        boolean lanjut = true;
+        while (lanjut) {
+            // Meminta bilangan 1
+            System.out.print("\nMasukkan bilangan 1: ");
+            double bilangan1 = scanner.nextDouble();
 
-            // Meminta input bilangan 2
-            System.out.print("Masukkan bilangan kedua: ");
-            double bil2 = scanner.nextDouble();
+            // Meminta bilangan 2
+            System.out.print("Masukkan bilangan 2: ");
+            double bilangan2 = scanner.nextDouble();
 
-            // Meminta input operator matematika
-            char operator;
-            while (true) {
-                System.out.print("Masukkan operator (+, -, *, /): ");
-                operator = scanner.next().charAt(0);
-                if (operator == '+' || operator == '-' || operator == '*' || operator == '/') {
-                    break;
-                } else {
-                    System.out.println("Operator tidak valid. Pilih operator yang valid.");
-                }
-            }
+            // Meminta operator matematika
+            System.out.print("Pilih operator (+, -, *, /): ");
+            char operator = scanner.next().charAt(0);
 
+            // Menghitung hasil
             double hasil = 0;
-            boolean operatorValid = true;
-
-            // Menghitung berdasarkan operator
             switch (operator) {
                 case '+':
-                    hasil = bil1 + bil2;
+                    hasil = bilangan1 + bilangan2;
                     break;
                 case '-':
-                    hasil = bil1 - bil2;
+                    hasil = bilangan1 - bilangan2;
                     break;
                 case '*':
-                    hasil = bil1 * bil2;
+                    hasil = bilangan1 * bilangan2;
                     break;
                 case '/':
-                    if (bil2 != 0) {
-                        hasil = bil1 / bil2;
+                    if (bilangan2 != 0) {
+                        hasil = bilangan1 / bilangan2;
                     } else {
-                        System.out.println("Error: Pembagian dengan nol tidak diperbolehkan.");
-                        operatorValid = false;
+                        System.out.println("Operator tidak valid. Pilih operator yang valid.");
+                        continue;
                     }
                     break;
                 default:
-                    operatorValid = false;
-                    break;
+                    System.out.println("Operator tidak valid. Pilih operator yang valid.");
+                    continue;
             }
 
-            // Menampilkan hasil jika operator valid
-            if (operatorValid) {
-                System.out.println("Hasil: " + bil1 + " " + operator + " " + bil2 + " = " + hasil);
-            }
+            // Menampilkan hasil perhitungan
+            System.out.println("\nHasil: " + hasil);
 
-            // Menanyakan apakah ingin melanjutkan
-            System.out.print("Apakah Anda ingin melanjutkan? (y/n): ");
-            char pilihan = scanner.next().charAt(0);
-            scanner.nextLine(); // Membersihkan buffer
-
-            if (pilihan == 'n' || pilihan == 'N') {
-                lanjutkan = false;
-                System.out.println("Thank you for using the calculator. Goodbye!");
+            // Bertanya apakah ingin melanjutkan
+            System.out.print("\nLanjutkan (y)? ");
+            String pilihan = scanner.next();
+            if (!pilihan.equalsIgnoreCase("y")) {
+                lanjut = false;
             }
         }
 
-        scanner.close();
+        // Pesan ucapan terima kasih
+        System.out.println("\nThank you for using the calculator. Goodbye!");
+
+        scanner.close(); // Menutup objek Scanner
     }
 }
