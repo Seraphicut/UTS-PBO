@@ -12,7 +12,7 @@ import java.util.Scanner;
  * @author A-27
  */
 public class UTS {
-public static void main(String[] args) {
+    public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
         // Tampilan awal
@@ -58,8 +58,16 @@ public static void main(String[] args) {
             double bil2 = scanner.nextDouble();
 
             // Meminta input operator matematika
-            System.out.print("Masukkan operator (+, -, *, /): ");
-            char operator = scanner.next().charAt(0);
+            char operator;
+            while (true) {
+                System.out.print("Masukkan operator (+, -, *, /): ");
+                operator = scanner.next().charAt(0);
+                if (operator == '+' || operator == '-' || operator == '*' || operator == '/') {
+                    break;
+                } else {
+                    System.out.println("Operator tidak valid. Pilih operator yang valid.");
+                }
+            }
 
             double hasil = 0;
             boolean operatorValid = true;
@@ -84,7 +92,6 @@ public static void main(String[] args) {
                     }
                     break;
                 default:
-                    System.out.println("Operator tidak valid. Pilih operator yang valid.");
                     operatorValid = false;
                     break;
             }
@@ -97,6 +104,7 @@ public static void main(String[] args) {
             // Menanyakan apakah ingin melanjutkan
             System.out.print("Apakah Anda ingin melanjutkan? (y/n): ");
             char pilihan = scanner.next().charAt(0);
+            scanner.nextLine(); // Membersihkan buffer
 
             if (pilihan == 'n' || pilihan == 'N') {
                 lanjutkan = false;
